@@ -1,0 +1,47 @@
+
+<table th:fragment="table (users, allRoles)" class="table table-striped">
+    <!--/*@thymesVar id="users" type="java.util.List<User>"*/-->
+    <!--/*@thymesVar id="allRoles" type="java.util.List"*/-->
+
+
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Email</th>
+        <th scope="col">Role</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="sel_user: ${users}">
+        <!--/*@thymesVar id="sel_user" type="boot.model.User"*/-->
+        <th scope="row" th:text="${sel_user.id}"></th>
+        <td th:text="${sel_user.firstName}"></td>
+        <td th:text="${sel_user.lastName}"></td>
+        <td th:text="${sel_user.age}"></td>
+        <td th:text="${sel_user.email}"></td>
+        <td>
+            <div class="d-flex flex-row">
+                <p class="m-1" th:each="role: ${sel_user.roles}" th:text="${role.getNameRole()} "></p>
+            </div>
+        </td>
+        <td>
+            <button class="btn btn-info text-white" data-bs-toggle="modal" th:data-bs-target="'#modal-u' + ${sel_user.id}">Edit</button>
+
+            <div th:insert="fragment/modal-update :: modal (sel_user = ${sel_user}, allRoles=${allRoles})"></div>
+        </td>
+<!--        th:href="@{/admin/delete(id = ${user.id})}-->
+        <td>
+            <button class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#modal' + ${sel_user.id}">Delete</button>
+            <div th:insert="fragment/modal-delete :: modal (user = ${sel_user})"></div>
+        </td>
+        <!--/*@thymesVar id="role" type="boot.model.Role"*/-->
+
+    </tr>
+    </tbody>
+</table>

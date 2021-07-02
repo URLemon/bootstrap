@@ -1,0 +1,42 @@
+<div th:fragment="modal (user)" class="modal fade" th:id="'modal' + ${user.id}"  tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <!--/*@thymesVar id="user" type="boot.model.User"*/-->
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete user</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex flex-column col-4 align-items-center offset-4">
+                    <h5>ID</h5>
+                    <input type="text" class="disabled" readonly th:value="${user.id}" disabled>
+                    <h5>First name</h5>
+                    <input type="text" class="disabled" readonly disabled th:value="${user.firstName}">
+                    <h5>Last name</h5>
+                    <input type="text" class="disabled" readonly disabled th:value="${user.lastName}">
+                    <h5>Age</h5>
+                    <input type="text" class="disabled" readonly disabled th:value="${user.age}">
+                    <h5>Email</h5>
+                    <input type="text" class="disabled" readonly disabled th:value="${user.email}">
+                    <h5>Role</h5>
+                    <!--/*@thymesVar id="role" type="boot.model.Role"*/-->
+                    <select disabled class="col-12" th:size="2">
+                        <option>
+                            User
+                        </option>
+                        <option>
+                            Admin
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a type="button" class="btn btn-danger" th:href="@{/admin/delete(id = ${user.id})}">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
